@@ -2,12 +2,12 @@ import * as React from 'react'
 import { Image,ImageBackground, View, StyleSheet, Button, Text, TouchableOpacity, FlatList} from 'react-native';
 
 import colors from '../config/colors'
-
-import Reel from '../data/testWheel'
+import Reel from '../components/Reel'
+import NavigationFooter from '../components/navigationFooter';
 
 // Item List 
 import itemList from '../config/itemList';
-import il from '../data/testWheel'
+import il from '../components/Reel'
 
 
 const _spacing= 10;
@@ -17,8 +17,10 @@ function PlayScreen({navigation}) {
             <View style = {styles.scrollArea}>
                 <Reel></Reel>
             </View>
+
+            
             <View style = {styles.otherArea}>
-                <TouchableOpacity style = {styles.button}  onPress={() =>navigation.navigate('Home') }
+            <TouchableOpacity style = {styles.button}  onPress={() =>navigation.navigate('Home') }
                     ><Text style = {{fontSize: 30}}>Home</Text>
                 </TouchableOpacity>  
                 <TouchableOpacity 

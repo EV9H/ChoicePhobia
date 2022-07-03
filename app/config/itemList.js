@@ -40,5 +40,17 @@ export default class itemList extends Component{
     setItem(inputText, editedItem){
         this.state.list[editedItem -1]= {name: inputText, key:editedItem};
     }
+
+    deleteItem(deleteKey){
+        const filteredData = this.state.list.filter(item => item.key !== deleteKey);
+        this.state.list = filteredData;
+    }
+
+    getItemNameByIndex(idx){
+        if(idx == -1){
+            return;
+        }
+       return this.state.list[idx].name;
+    }
 }
 

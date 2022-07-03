@@ -2,18 +2,19 @@ import React, {Component} from 'react';
 import { StyleSheet, View, TouchableOpacity} from 'react-native';
 import { Ionicons} from '@expo/vector-icons';
 
-import Editor from '../data/Editor'
+import Editor from '../components/Editor'
 import colors from '../config/colors';
 import { _spacing } from '../config/globalStyle';
 
 function Edit({navigation}) {
     return (
-        <View style = {{flex:1}}> 
-            <Editor></Editor>
+        <View style = {{flex:1, backgroundColor: colors.primary}}> 
             <TouchableOpacity style = {styles.button}
-                onPress={ () => navigation.navigate('Play')}
-            ><Ionicons name="add" size={24} color = {colors.black} />
+                    onPress={ () => navigation.navigate('Play')}
+                ><Ionicons style = {{top: 40,left: '300%'}}name="ios-close" size={40} color = {colors.black} />
             </TouchableOpacity> 
+            <Editor></Editor>
+            
 
         </View>
         
@@ -25,7 +26,8 @@ export default Edit;
 
 const styles = StyleSheet.create({
     button:{
-        color: colors.white,
+        height:"10%",
+        color: colors.primary,
         width: _spacing * 10,
         alignItems: "center",
     },

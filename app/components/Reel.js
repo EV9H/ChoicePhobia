@@ -21,7 +21,9 @@ class Reel extends Component {
     super(props);
     const chosenID = 0;
     this.state = {
+      data: il.state.list,
       chosenID: chosenID,
+      refresh: false,
     };
   }
   getItemLayout = (data, index) => (
@@ -34,7 +36,7 @@ class Reel extends Component {
   }
   
   scrollToIndex = () => {
-    let randomIndex = Math.floor(Math.random(Date.now()) * this.props.data.length);
+    let randomIndex = Math.floor(Math.random(Date.now()) * this.state.data.length);
     this.setState({chosenID: randomIndex});
     this.flatListRef.scrollToIndex({animated: true, index:randomIndex, viewPosition: 0.5});
   }
@@ -44,6 +46,8 @@ class Reel extends Component {
     return (
       <View style={styles.container}>
         <FlatList
+          data = {this.state.data}
+          extraData = {this.state.refresh}
           style = {styles.roller}
           ref={(ref) => { this.flatListRef = ref; }}
           keyExtractor={(item) => item.key}
@@ -110,8 +114,6 @@ const styles = StyleSheet.create({
 
 export default class app extends Component {
   render() {
-    return  <Reel
-              data={getData()}
-            />
+    return  <Reel/>
   }
 }

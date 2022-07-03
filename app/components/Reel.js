@@ -41,6 +41,10 @@ class Reel extends Component {
     this.flatListRef.scrollToIndex({animated: true, index:randomIndex, viewPosition: 0.5});
   }
 
+  refreshList = () => {
+    this.flatListRef.setState({refresh: !this.state.refresh})
+  }
+
   render() {
     const chosen = this.state.chosenID;
     return (
@@ -69,7 +73,7 @@ class Reel extends Component {
         <TouchableOpacity
             style = {styles.dice}
             onPress={this.scrollToIndex}
-        ><FontAwesome5 name="dice-six" size={75} color= {colors.white} /></TouchableOpacity>
+        ><FontAwesome5 name="dice-six" size={75} color= {colors.whiteOpacity} /></TouchableOpacity>
       </View>
     );
   }
@@ -97,7 +101,8 @@ const styles = StyleSheet.create({
       height: _spacing * 13,
       justifyContent: 'center',
       alignItems: 'center',
-      flexGrow: 0
+      flexGrow: 0,
+      backgroundColor: colors.whiteOpacity,
   }),
   font:{
     color: '#36303F', 

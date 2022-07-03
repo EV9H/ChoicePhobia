@@ -10,7 +10,7 @@ const _spacing = 10;
 
 var inputText = "";
 var editedItem = -1;
-var refresh = false;
+
 class Editor extends Component {
     constructor(props){
         super(props);
@@ -31,7 +31,7 @@ class Editor extends Component {
 
     handleEditItem(){
         il.setItem(inputText, editedItem);
-        this.setState({refresh: !refresh, selected: -1, selectedKey: -1 });
+        this.setState({refresh: !this.state.refresh, selected: -1, selectedKey: -1 });
     }
 
     handleDeleteItem(){
@@ -41,7 +41,7 @@ class Editor extends Component {
         }
         let deleteKey = this.state.selectedKey;
         il.deleteItem(deleteKey);
-        this.setState({data: il.state.list, refresh: !refresh, selected: -1, selectedKey: -1});
+        this.setState({data: il.state.list, refresh: !this.state.refresh, selected: -1, selectedKey: -1});
     }
 
     getText(){
@@ -112,12 +112,12 @@ class Editor extends Component {
                 <View style = {styles.optionMenu}>
                     <TouchableOpacity style = {styles.button}
                         onPress={ () => {}}
-                    ><Ionicons name="ios-add" size={24} color="black" />  
+                    ><Ionicons name="ios-add" size={24} color= {colors.whiteOpacity} />  
                     </TouchableOpacity>
                     
                     <TouchableOpacity style = {styles.button} disabled = {this.state.selected === -1}
                         onPress={ () => {this.setState({isModalVisible: true})}}
-                    ><AntDesign  name="edit" size={24} color = {this.state.selected === -1 ? "gray" : "black"} />  
+                    ><AntDesign  name="edit" size={24} color = {this.state.selected === -1 ? "black" : colors.whiteOpacity} />  
                     </TouchableOpacity>
 
                     <TouchableOpacity 
@@ -126,7 +126,7 @@ class Editor extends Component {
                         onPress={ 
                             () => {this.handleDeleteItem();  
                         }}
-                    ><AntDesign  name="delete" size={24} color = {this.state.selected === -1 ? "gray" : "black"} />  
+                    ><AntDesign  name="delete" size={24} color = {this.state.selected === -1 ? "black" : colors.whiteOpacity} />  
                     </TouchableOpacity>
 
                     
@@ -147,7 +147,6 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: colors.primary,
     },
     optionMenu:{
         padding: 30, 
@@ -171,7 +170,8 @@ const styles = StyleSheet.create({
         height: _spacing * 5,
         justifyContent: 'center',
         alignItems: 'center',
-        flexGrow: 0
+        flexGrow: 0,
+        backgroundColor: colors.whiteOpacity,
     }),
     font:{
       color: '#36303F', 

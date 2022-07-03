@@ -5,4 +5,5 @@ export default{
     white: "#FFF",
     active: "pink",
     inactive: "gray",
+    whiteOpacity: "#FFFFFF99"
 }

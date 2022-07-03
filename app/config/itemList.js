@@ -4,6 +4,7 @@ import { Component } from 'react';
 export default class itemList extends Component{
     constructor(props) {
         super(props);
+        let initKeyNum = 9;
         this.state = {
             list: [
             {name: 'Do Chores', key: '1'} ,
@@ -16,6 +17,7 @@ export default class itemList extends Component{
             {name: 'Write love words', key: '8'} ,
             {name: 'Play games with partner', key: '9'} ,
             ],
+            keyCnt: initKeyNum,
         };
         
       }
@@ -34,11 +36,14 @@ export default class itemList extends Component{
                 return;
             }
         }
-        this.state.list.push({name: "NEW ITEM", key: this.state.list.length + 1});
+        this.state.list.push({name: "NEW ITEM", key: initKeyNum + 1});
+        this.state.keyCnt += 1;
     }
 
     setItem(inputText, editedItem){
-        this.state.list[editedItem -1]= {name: inputText, key:editedItem};
+        this.state.keyCnt += 1;
+        this.state.list[editedItem -1]= {name: inputText, key:this.state.keyCnt};
+        
     }
 
     deleteItem(deleteKey){

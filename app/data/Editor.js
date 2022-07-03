@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {Component, useState } from 'react';
 import { Dimensions, StyleSheet, Text, View, TouchableOpacity,TouchableHighlight, FlatList, Modal, TextInput} from 'react-native';
 import itemList from '../config/itemList';
 import '../data/testWheel';
@@ -16,7 +16,7 @@ var refresh = false;
 class Editor extends Component {
     constructor(props){
         super(props);
-        init = getData();
+        let init = this.getData();
         this.state ={
             data: init,
 
@@ -39,8 +39,8 @@ class Editor extends Component {
             <View style = {styles.background}>
                 
                 <FlatList
-                    data = {data}
-                    extraData = {data}
+                    data = {this.getData()}
+                    extraData = {this.state}
                     style = {styles.roller}
                     keyExtractor={(item) => item.key}
                     //onRefresh={onRefresh}
@@ -68,7 +68,7 @@ class Editor extends Component {
                         multiline = {false}
                         maxLength = {200}
                     /> 
-                    <TouchableHighlight onPress={() => {handleEditItem(editedItem);setData(getData()); }} 
+                    <TouchableHighlight onPress={() => {this.handleEditItem(editedItem); }} 
                         style={[styles.touchableHighlight, {backgroundColor: 'orange'}]} underlayColor={'#f1f1f1'}>
                         <Text style={styles.text}>Save</Text>
                     </TouchableHighlight>  
@@ -76,16 +76,10 @@ class Editor extends Component {
 
                 <View style = {styles.optionMenu}>
                     <TouchableOpacity style = {styles.button}
-                        onPress={ () => {setModalVisible(true); alert(isModalVisible);}}
+                        onPress={ () => {}}
                     ><AntDesign  name="edit" size={24} color = {colors.black} />  
                     </TouchableOpacity>
                     
-
-
-                    <TouchableOpacity style = {styles.button}
-                        onPress={ () => navigation.navigate('Play')}
-                    ><Foundation name="play" size={24} color = {colors.black} />
-                    </TouchableOpacity> 
                 </View>
             
 
@@ -169,7 +163,6 @@ const styles = StyleSheet.create({
   export default class app extends Component {
     render() {
       return  <Editor
-                data={getData()}
               />
     }
   }

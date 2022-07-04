@@ -6,7 +6,7 @@ import Editor from '../components/Editor'
 import colors from '../config/colors';
 import { _spacing } from '../config/globalStyle';
 
-function Edit({navigation}) {
+function Templates({navigation}) {
     return (
         <ImageBackground source = {require('../assets/dicebg.jpg')} style = {{flex:1, backgroundColor: colors.black}}> 
             <TouchableOpacity style = {styles.button}
@@ -14,14 +14,12 @@ function Edit({navigation}) {
                 ><Ionicons style = {{top: 40,left: '300%'}}name="ios-close" size={40} color = {colors.whiteOpacity} />
             </TouchableOpacity> 
             <Editor></Editor>
-            
-
         </ImageBackground>
         
     );
 }
 
-export default Edit;
+export default Templates;
 
 
 const styles = StyleSheet.create({

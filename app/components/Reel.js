@@ -3,17 +3,11 @@ import { Text, View, FlatList, Dimensions, Button, StyleSheet, Image, TouchableO
 import colors from '../config/colors';
 import itemList from '../config/itemList';
 import { FontAwesome5 } from '@expo/vector-icons';
+import '../screens/WelcomeScreen';
 
 const { width} = Dimensions.get('window');
 const _spacing = 10;
 const COLORS = [colors.primary, colors.secondary,'red'];
-global.il = new itemList();
-
-function getData() {
-  let data = il.getList();
-  let n = data.length;
-  return data;
-}
 
 
 class Reel extends Component {

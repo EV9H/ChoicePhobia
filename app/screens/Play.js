@@ -13,6 +13,7 @@ import il from '../components/Reel'
 
 const _spacing= 10;
 function PlayScreen({navigation}) {   
+    
     return (
         <ImageBackground source = {require('../assets/dicebg.jpg')} style = {styles.background}>    
             <TouchableOpacity style = {styles.button}
@@ -22,11 +23,6 @@ function PlayScreen({navigation}) {
             <View style = {styles.scrollArea}>
                 <Reel></Reel>
             </View>
-
-
-
-            
-            
         </ImageBackground>
     );
 }

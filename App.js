@@ -1,6 +1,7 @@
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import Play from './app/screens/Play';
 import Edit from './app/screens/Edit';
+import Templates from './app/screens/Templates'
 import 'react-native-gesture-handler';
 import { createStackNavigator} from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -20,6 +21,7 @@ export default function App() {
             <Stack.Screen name = "Home" component = {WelcomeScreen}/>
             <Stack.Screen name = "Play" component = {Play}  />
             <Stack.Screen name = "Edit" component = {Edit}  />
+            <Stack.Screen name = "Templates" component = {Templates}  />
         </Stack.Navigator>
       </NavigationContainer>
       

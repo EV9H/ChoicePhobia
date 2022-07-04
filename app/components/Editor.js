@@ -2,6 +2,7 @@ import React, {Component, useState } from 'react';
 import { Dimensions, StyleSheet, Text, View, TouchableOpacity,TouchableHighlight, FlatList, Modal, TextInput,Button} from 'react-native';
 import itemList from '../config/itemList';
 import './Reel';
+import '../screens/WelcomeScreen';
 import { AntDesign,Ionicons,Foundation} from '@expo/vector-icons';
 import colors from '../config/colors';
 
@@ -28,6 +29,10 @@ class Editor extends Component {
     //     let dt = global.il.getList();
     //     return dt; 
     // }
+    handleAddItem(){
+        il.newItem();
+        this.setState({data: il.state.list, refresh: !this.state.refresh, selected: -1, selectedKey: -1 });
+    }
 
     handleEditItem(){
         il.setItem(inputText, editedItem);
@@ -111,7 +116,7 @@ class Editor extends Component {
 
                 <View style = {styles.optionMenu}>
                     <TouchableOpacity style = {styles.button}
-                        onPress={ () => {}}
+                        onPress={ () => {this.handleAddItem();}}
                     ><Ionicons name="ios-add" size={24} color= {colors.whiteOpacity} />  
                     </TouchableOpacity>
                     

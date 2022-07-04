@@ -1,19 +1,67 @@
 import React from 'react';
 import { Button, Image, ImageBackground, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import colors from '../config/colors';
-import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import itemList from '../config/itemList';
+
+global.il = new itemList();
+
+const _fontFamily = 'Sextape';
+
+function setAppLaunched(){
+    AsyncStorage.setItem("HAS_LAUNCHED", 'LAUNCHED');
+}
+
+function clearStorage(){
+    AsyncStorage.clear();
+}
+
+const launch = async() =>{
+    try{
+        const isLaunched = await AsyncStorage.getItem("HAS_LAUNCHED");
+        if(isLaunched == null){ 
+            setAppLaunched(); 
+            try {
+                const initList = [{name: 'Create Your Own List or Use Template', key: '1'}];
+                const listValue = JSON.stringify(initList)
+                await AsyncStorage.setItem("init", listValue);
+                //initialize state
+                il.state.list = initList;
+                il.state.curListName = "init";
+                il.state.keyCnt = il.state.list.length;
+                il.state.lastLaunchedlist = "init";
+                await AsyncStorage.setItem("lastLaunchedList", "init");
+                await AsyncStorage.setItem("_state",JSON.stringify(il.state) );
+                setAppLaunched();
+            } catch (e) {
+                alert(e);
+            }
+            
+        }
+        else{
+            il.state.list = await il.getListAsync();
+            il.state.curListName = await AsyncStorage.getItem("lastLaunchedList");
+            il.state.keyCnt = il.state.list.length;
+            il.state.lastLaunchedlist = il.state.curListName;
+        } 
+    }catch(e){
+        alert(e)
+    }
+}
 
 function WelcomeScreen({navigation}) {
-    let [fontsLoaded] = useFonts({
-        'Lobster-Regular': require('../fonts/Lobster-Regular.ttf'),
-        'Sextape' : require('../fonts/Sextape.ttf'),
-      });
 
-    if (!fontsLoaded) {
-        return <AppLoading />;
+    let [fontsLoaded] = useFonts({
+         'Lobster-Regular': require('../fonts/Lobster-Regular.ttf'),
+        'Sextape' : require('../fonts/Sextape.ttf'),
+       });
+    if (!fontsLoaded){
+        return null;
     }
-    
+
+    launch();
+    //clearStorage();
 
     return (
             <ImageBackground source = {require('../assets/dicebg.jpg')} style = {styles.background}>
@@ -31,9 +79,12 @@ function WelcomeScreen({navigation}) {
                         <Text style = {styles.font}>Edit Items</Text>
                     </TouchableOpacity>
 
+                    <TouchableOpacity style = {styles.playButton} color = {colors.primary} onPress={ () => navigation.navigate('Templates')}>
+                        <Text style = {styles.font}>Templates</Text>
+                    </TouchableOpacity>
+
                 </View>
-                
-                
+
             </ImageBackground>
             
         
@@ -55,7 +106,7 @@ const styles = StyleSheet.create({
     logoText:{
         fontSize: 60,
         textAlign: "center",
-        fontFamily: "Sextape",
+        fontFamily: _fontFamily,
         top: 100,
         color: colors.white,
     },
@@ -80,7 +131,7 @@ const styles = StyleSheet.create({
     },
     font:{
         // color: '#36303F',
-        fontFamily: "Sextape", 
+        fontFamily: _fontFamily, 
         color: "white",
         fontWeight: '700',
         fontSize: 20,

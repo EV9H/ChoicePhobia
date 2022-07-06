@@ -1,3 +1,8 @@
-# ChoicePhobia
+# ChoicePhobia V1.0 Function View
 
-[![Video Presentation](https://imgur.com/a/xQZhKI1)](https://www.youtube.com/watch?v=TRpY5Er7xto)
+<div align="left">
+    <a href="www.youtube.com/watch?v=TRpY5Er7xto">
+       <img src="https://img.youtube.com/vi/TRpY5Er7xto/0.jpg" style="width:100%;">
+    </a>
+</div>
+

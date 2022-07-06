@@ -1,3 +1,3 @@
 # ChoicePhobia
 
-[![Video Presentation](https://imgur.com/4YKewst)](https://www.youtube.com/watch?v=TRpY5Er7xto)
+[![Video Presentation](https://imgur.com/a/xQZhKI1)](https://www.youtube.com/watch?v=TRpY5Er7xto)

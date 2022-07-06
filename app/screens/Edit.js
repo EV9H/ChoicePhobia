@@ -8,13 +8,13 @@ import { _spacing } from '../config/globalStyle';
 
 function Templates({navigation}) {
     return (
-        <ImageBackground source = {require('../assets/dicebg.jpg')} style = {{flex:1, backgroundColor: colors.black}}> 
+        <View style = {{flex:1, backgroundColor: colors.black}}> 
             <TouchableOpacity style = {styles.button}
                     onPress={ () => {navigation.navigate('Home');}}
                 ><Ionicons style = {{top: 40,left: '300%'}}name="ios-close" size={40} color = {colors.whiteOpacity} />
             </TouchableOpacity> 
             <Editor></Editor>
-        </ImageBackground>
+        </View>
         
     );
 }

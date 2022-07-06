@@ -1,6 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useIsFocused } from '@react-navigation/native';
 
 const templateLists = [
     {name:'relationship', content: [
@@ -34,7 +35,7 @@ export default class itemList extends Component{
         this.state = {
             curListName: "",
             list: [],
-            keyCnt: 1,
+            keyCnt: 3,
             templateSeleted: -1,
             lastLaunchedlist: "",
             launched: false,
@@ -68,6 +69,7 @@ export default class itemList extends Component{
         try {
             const listValue = JSON.stringify(this.state.list);
             await AsyncStorage.setItem(this.state.curListName, listValue);
+            await AsyncStorage.setItem("key", JSON.stringify(this.state.keyCnt));
         } catch (e) {
             console.log(e);
         }
@@ -85,21 +87,26 @@ export default class itemList extends Component{
         }
     }
 
-    // getList() {     
-    //     //return this.state.list;
-    //     return this.getListAsync();
-    // }
 
     newItem(){
         // No Key Repeats
-        this.state.list.push({name: " ", key: this.state.keyCnt + 1});
-        this.state.keyCnt += 1;
-        this.saveListAsync(this.state.curListName);
+        if(this.state.list === null || this.state.list.length === 0){        //empty list
+            this.state.list.push({name: " ", key: this.state.keyCnt});
+            this.state.keyCnt += 1;
+            this.saveListAsync();
+
+        }else{
+            let k = this.state.keyCnt;
+            this.state.keyCnt += 1;
+            this.state.list.push({name: " ", key: k});
+            this.saveListAsync();
+        }
+        
     }
 
     setItem(inputText, editedItem){
         this.state.keyCnt += 1;
-        this.state.list[editedItem -1]= {name: inputText, key:this.state.keyCnt};
+        this.state.list[editedItem -1]= {name: inputText, key:this.state.list[editedItem-1].key};
         this.saveListAsync(this.state.curListName);
     }
 

@@ -15,7 +15,7 @@ const _spacing= 10;
 function PlayScreen({navigation}) {   
     
     return (
-        <ImageBackground source = {require('../assets/dicebg.jpg')} style = {styles.background}>    
+        <View style = {styles.background}>    
             <TouchableOpacity style = {styles.button}
                     onPress={ () => {navigation.navigate('Home');}}
                 ><Ionicons style = {{top: 40,left: '300%'}}name="ios-close" size={40} color = {colors.whiteOpacity} />
@@ -23,14 +23,14 @@ function PlayScreen({navigation}) {
             <View style = {styles.scrollArea}>
                 <Reel></Reel>
             </View>
-        </ImageBackground>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     background:{
         flex:1,
-        backgroundColor: "black",
+        backgroundColor: colors.black,
     },
 
     scrollArea:{

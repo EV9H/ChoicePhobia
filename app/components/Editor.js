@@ -176,10 +176,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexGrow: 0,
-        backgroundColor: colors.whiteOpacity,
+        backgroundColor: colors.button,
     }),
     font:{
-      color: '#36303F', 
+      color: colors.white, 
       fontWeight: '700',
       fontSize: 20,
     },

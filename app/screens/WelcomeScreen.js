@@ -25,13 +25,13 @@ const launch = async() =>{
         if(isLaunched === null){
             setAppLaunched(); 
             try {
-                const initList = [{name: 'Create Your Own List', key: '1'}, {name: 'Or Use a Template', key: '2'}];
+                const initList = [{name: 'Create Your Own List !', key: '1'}];
                 const listValue = JSON.stringify(initList)
                 await AsyncStorage.setItem("init", listValue);
                 //initialize state
                 il.state.list = initList;
                 il.state.curListName = "init";
-                il.state.keyCnt = 3;
+                il.state.keyCnt = 2;
                 il.state.lastLaunchedlist = "init";
                 await AsyncStorage.setItem("lastLaunchedList", "init");
                 await AsyncStorage.setItem("_state",JSON.stringify(il.state) );

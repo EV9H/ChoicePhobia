@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, FlatList, Dimensions, Button, StyleSheet, Image, TouchableOpacity, ScrollView} from 'react-native';
 import colors from '../config/colors';
 import itemList from '../config/itemList';
+import ReelItem from './ReelItem';
 import { FontAwesome5 } from '@expo/vector-icons';
 import '../screens/WelcomeScreen';
 
@@ -10,7 +11,7 @@ const _spacing = 10;
 const COLORS = [colors.primary, colors.secondary,'red'];
 
 
-class Reel extends Component {
+export default class Reel extends Component {
   constructor (props) {
     super(props);
     const chosenID = 0;
@@ -32,7 +33,6 @@ class Reel extends Component {
   scrollToIndex = () => {
     let randomIndex = Math.floor(Math.random() * this.state.data.length);
     this.setState({chosenID: randomIndex});
-     
     this.flatListRef.scrollToIndex({animated: true, index:Math.floor(randomIndex / 3), viewPosition: 0.5});
   }
 
@@ -40,8 +40,18 @@ class Reel extends Component {
     this.flatListRef.setState({refresh: !this.state.refresh})
   }
 
+  traverse =() =>{
+    let that = this;
+    for(let i = 0; i < 20; i++){
+      setTimeout(() => {
+        that.scrollToIndex();
+      }, Math.pow(i,2)/1.5*10);
+    } 
+  }
 
-
+  delay =() =>{
+    
+  }
   render() {
     const chosen = this.state.chosenID;
     return (
@@ -62,23 +72,33 @@ class Reel extends Component {
             getItemLayout={this.getItemLayout}
             contentContainerStyle={{ paddingLeft: _spacing, alignSelf: 'flex-start',}}
             showsHorizontalScrollIndicator = {false}
-            renderItem={({ item, index}) => (
-                <TouchableOpacity onPress={()=>{}}>
-                    <View style={styles.rollerComponent(index === chosen)}>  
-                        <Text style = {styles.font}> {item.name} </Text>
-                    </View>
-
-                </TouchableOpacity>
+            renderItem={({ item, index}) => {
+                return (
+                    // <View style={styles.rollerComponent(index === chosen)}>  
+                    //     <Text style = {styles.font}> {item.name} </Text>
+                    // </View>  
+                    <ReelItem idx = {index} item = {item.name} active = {index == chosen}> </ReelItem>
+           
+                )
                 
-              )}
+            }
+                    
+
+                
+              }
             {...this.props}
           />
         </ScrollView>
         
-        <TouchableOpacity
+        {/* <TouchableOpacity
             style = {styles.dice}
             onPress={this.scrollToIndex}
-        ><FontAwesome5 name="dice-six" size={75} color= {colors.button} /></TouchableOpacity>
+        ><FontAwesome5 name="dice-six" size={75} color= {colors.button} /></TouchableOpacity> */}
+        <TouchableOpacity
+            style = {styles.dice}
+            onPress={this.traverse}
+        ><FontAwesome5 name="dice-six" size={75} color= {colors.white} /></TouchableOpacity>
+
       </View>
     );
   }
@@ -125,8 +145,4 @@ const styles = StyleSheet.create({
      
 });
 
-export default class app extends Component {
-  render() {
-    return  <Reel/>
-  }
-}
+

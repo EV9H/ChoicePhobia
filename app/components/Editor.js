@@ -88,7 +88,7 @@ class Editor extends Component {
                     <View style={styles.modalView}>
                         <View style = {styles.editorWindow}>
                             <View style = {{alignSelf: "flex-end", marginBottom: 10, marginRight: 10, marginTop: 10}}>
-                                <TouchableOpacity><Ionicons name="ios-close" size={30} color="black" />
+                                <TouchableOpacity onPress = {()=>{this.setState({isModalVisible:false});}}><Ionicons name="ios-close" size={30} color="black" />
                                 </TouchableOpacity>
                             </View>
                             <TextInput
@@ -105,7 +105,7 @@ class Editor extends Component {
                                     this.setState({isModalVisible: false}); 
                                 }
                                 } 
-                                style={[styles.touchableHighlight, {backgroundColor: 'orange'}]} underlayColor={'#f1f1f1'}>
+                                style={[styles.touchableHighlight, {backgroundColor: colors.button}]} underlayColor={'#f1f1f1'}>
                                 <Text style={styles.text}>Save</Text>
                             </TouchableHighlight>  
                         </View>
@@ -223,6 +223,7 @@ const styles = StyleSheet.create({
     },
 
     editorWindow:{
+        top: -100,
         width: "80%",
         height: "20%",
         alignItems: "center",
